@@ -21,7 +21,7 @@ public class StatsServiceImpl implements StatsService {
     @Override
     @Transactional
     public void addHit(EndpointHit endpointHit) {
-        statsRepository.save(StatsMapper.EndpointToStats(endpointHit,
+        statsRepository.save(StatsMapper.endpointToStats(endpointHit,
                 LocalDateTime.parse(endpointHit.getTimestamp(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))));
     }
 
