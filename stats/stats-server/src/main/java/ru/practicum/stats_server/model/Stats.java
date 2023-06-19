@@ -12,7 +12,8 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "stats", schema = "public")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
