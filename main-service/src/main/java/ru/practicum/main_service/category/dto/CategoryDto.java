@@ -1,29 +1,26 @@
 package ru.practicum.main_service.category.dto;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.FieldDefaults;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
-@FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class CategoryDto {
-    Long id;
+    private Long id;
 
     @NotBlank
     @Size(min = 1, max = 50)
-    String name;
+    private String name;
 
     @Override
     public boolean equals(Object o) {

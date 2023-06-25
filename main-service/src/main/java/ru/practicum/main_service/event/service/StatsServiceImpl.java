@@ -39,17 +39,12 @@ public class StatsServiceImpl implements StatsService {
 
     @Override
     public void addHit(HttpServletRequest request) {
-        log.info("Отправлен запрос на регистрацию обращения к серверу статистики с параметрами request = {}", request);
-
         statsClient.addHit(appName, request.getRequestURI(), request.getRemoteAddr(),
                 LocalDateTime.parse(LocalDateTime.now().format(formatter), formatter));
     }
 
     @Override
     public List<ViewStats> getStats(LocalDateTime start, LocalDateTime end, List<String> uris, Boolean unique) {
-        log.info("Отправлен запрос на получение статистики к серверу статистики с параметрами " +
-                        "start = {}, end = {}, uris = {}, unique = {}", start, end, uris, unique);
-
         ResponseEntity<Object> response = statsClient.getStats(start, end, uris, unique);
 
         try {
@@ -61,9 +56,6 @@ public class StatsServiceImpl implements StatsService {
 
     @Override
     public Map<Long, Long> getViews(List<Event> events) {
-        log.info("Отправлен запрос на получение статистики неуникальных посещений в виде Map<eventId, count> " +
-                "для списка событий.");
-
         Map<Long, Long> views = new HashMap<>();
 
         List<Event> publishedEvents = getPublished(events);

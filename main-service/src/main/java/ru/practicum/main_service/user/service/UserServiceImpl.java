@@ -26,15 +26,11 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public UserDto create(NewUserRequest newUserRequest) {
-        log.info("Добавление пользователя {}", newUserRequest);
-
         return userMapper.toUserDto(userRepository.save(userMapper.toUser(newUserRequest)));
     }
 
     @Override
     public List<UserDto> getUsers(List<Long> ids, Pageable pageable) {
-        log.info("Вывод пользователей с id {} и пагинацией {}", ids, pageable);
-
         if (ids == null || ids.isEmpty()) {
             return userRepository.findAll(pageable).stream()
                     .map(userMapper::toUserDto)
@@ -49,19 +45,15 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void deleteById(Long id) {
-        log.info("Удаление пользователя с id {}", id);
-
         userRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Пользователя с таким id не существует."));
+                .orElseThrow(() -> new NotFoundException("No such user id " + id));
 
         userRepository.deleteById(id);
     }
 
     @Override
     public User getUserById(Long id) {
-        log.info("Вывод пользователя с id {}", id);
-
         return userRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Пользователя с таким id не существует."));
+                .orElseThrow(() -> new NotFoundException("No such user id " + id));
     }
 }

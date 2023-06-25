@@ -1,12 +1,10 @@
 package ru.practicum.main_service.event.model;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import ru.practicum.main_service.event.enums.RequestStatus;
@@ -16,7 +14,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,12 +34,12 @@ public class Request {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne//(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "event_id", referencedColumnName = "id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Event event;
 
-    @ManyToOne//(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "requester_id", referencedColumnName = "id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User requester;

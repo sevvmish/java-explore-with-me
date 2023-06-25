@@ -15,7 +15,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -42,7 +41,7 @@ public class Event {
     @Column(nullable = false, length = 2000)
     private String annotation;
 
-    @ManyToOne//(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
 
@@ -58,7 +57,7 @@ public class Event {
     @Column(nullable = false)
     private LocalDateTime eventDate;
 
-    @ManyToOne//(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "location_id", referencedColumnName = "id")
     private Location location;
 
@@ -71,7 +70,7 @@ public class Event {
 
     private LocalDateTime publishedOn;
 
-    @ManyToOne//(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User initiator;

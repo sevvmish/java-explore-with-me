@@ -1,18 +1,15 @@
 package ru.practicum.main_service.category.dto;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import lombok.experimental.FieldDefaults;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-@FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Setter
 @NoArgsConstructor
@@ -22,5 +19,5 @@ import javax.validation.constraints.Size;
 public class NewCategoryDto {
     @NotBlank
     @Size(min = 1, max = 50)
-    String name;
+    private String name;
 }

@@ -35,7 +35,6 @@ public class CompilationServiceImpl implements CompilationService {
     @Override
     @Transactional
     public CompilationDto create(NewCompilationDto newCompilationDto) {
-        log.info("Создание новой подборки событий с параметрами {}", newCompilationDto);
 
         List<Event> events = new ArrayList<>();
 
@@ -52,8 +51,6 @@ public class CompilationServiceImpl implements CompilationService {
     @Override
     @Transactional
     public CompilationDto patch(Long compId, UpdateCompilationRequest updateCompilationRequest) {
-        log.info("Обновление подборки событий с id {} и новыми параметрами {}", compId, updateCompilationRequest);
-
         Compilation compilation = getCompilationById(compId);
 
         if (updateCompilationRequest.getTitle() != null) {
@@ -80,8 +77,6 @@ public class CompilationServiceImpl implements CompilationService {
     @Override
     @Transactional
     public void deleteById(Long compId) {
-        log.info("Удаление подборки событий с id {}", compId);
-
         getCompilationById(compId);
 
         compilationRepository.deleteById(compId);
@@ -89,8 +84,6 @@ public class CompilationServiceImpl implements CompilationService {
 
     @Override
     public List<CompilationDto> getAll(Boolean pinned, Pageable pageable) {
-        log.info("Вывод всех подборок событий с параметрами pinned = {}, pageable = {}", pinned, pageable);
-
         List<Compilation> compilations;
 
         if (pinned == null) {
@@ -119,8 +112,6 @@ public class CompilationServiceImpl implements CompilationService {
 
     @Override
     public CompilationDto getById(Long compId) {
-        log.info("Вывод подборки событий с id {}", compId);
-
         Compilation compilation = getCompilationById(compId);
 
         List<EventShortDto> eventsShortDto = eventService.toEventsShortDto(compilation.getEvents());
@@ -130,12 +121,12 @@ public class CompilationServiceImpl implements CompilationService {
 
     private Compilation getCompilationById(Long compId) {
         return compilationRepository.findById(compId)
-                .orElseThrow(() -> new NotFoundException("Подборки с таким id не существует."));
+                .orElseThrow(() -> new NotFoundException("No such compilation with id " + compId));
     }
 
     private void checkSize(List<Event> events, List<Long> eventsIdToUpdate) {
         if (events.size() != eventsIdToUpdate.size()) {
-            throw new NotFoundException("Некоторые события не найдены.");
+            throw new NotFoundException("Events not found");
         }
     }
 }
