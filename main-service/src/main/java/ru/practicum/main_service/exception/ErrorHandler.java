@@ -21,7 +21,7 @@ import java.util.Objects;
 @RestControllerAdvice
 @Slf4j
 public class ErrorHandler {
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
     @Getter
     @AllArgsConstructor
     private static class ApiError {
@@ -31,6 +31,8 @@ public class ErrorHandler {
         private final String errors;
         private final String timestamp;
     }
+
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
